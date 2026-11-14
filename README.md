@@ -18,15 +18,9 @@
 - 玩家进服时自动重发已保存的皮肤。
 - 已放置的头颅记录在 `placed_skulls.json`，服务器重启后自动恢复。
 
-## 环境要求
+## 前置要求
 
-| 组件 | 版本 |
-| --- | --- |
-| Minecraft 基岩版专用服务器 | 1.26.60.6（协议 2225） |
-| LeviLamina | 26.60.x |
-| [HologramLib](https://github.com/Ieckseyr/HologramLib) | 26.60.x（ABI stamp 2） |
-
-HologramLib 是世界里显示头颅的必需前置，请安装到 `./mods/HologramLib/`。
+[HologramLib](https://github.com/Ieckseyr/HologramLib)是显示头颅的必需前置，请安装到 `./mods/HologramLib/`。
 
 如果 HologramLib 缺失或 ABI 不匹配，插件会输出警告并回退到内置的客户端假实体方案；该回退方案不是受支持的正式配置。
 
@@ -40,7 +34,6 @@ lip install github.com/FLAI-Studio/CustomSkull
 
 ### 手动安装
 
-1. 安装 LeviLamina 26.60.x（对应 BDS 1.26.60.6）。
 1. 把 HologramLib 26.60.x 安装到 `./mods/HologramLib/`。
 2. 从 Releases 下载 `CustomSkull-server-windows-x64.zip` 并解压到服务端`./mods`
 
@@ -85,15 +78,15 @@ lip install github.com/FLAI-Studio/CustomSkull
 }
 ```
 
-| 配置项 | 说明 |
-| --- | --- |
-| `enableJavaFetch` | 是否允许 `/skull java`。 |
-| `debug` | 输出更多调试日志；关闭时只保留警告和错误。 |
-| `skullNameFormat` | 头颅物品显示名，`{}` 会替换成玩家名。 |
-| `maxEntriesPerPacket` | 每个 `PlayerListPacket` 携带的皮肤数量（每个皮肤约 16 KiB）。 |
-| `keepSkinListed` | 是否保留普通皮肤条目。 |
-| `useHologramLib` | 使用 HologramLib `IPlayerNpc` 在世界中显示头颅。 |
-| `useServerAnchor` | 实验性：真实 armor_stand 锚点方案，当前版本强制关闭。 |
+| 配置项 | 默认值 | 说明 |
+| --- | --- | --- |
+| `enableJavaFetch` | true | 是否允许 `/skull java`。 |
+| `debug` | false | 输出更多调试日志；关闭时只保留警告和错误。 |
+| `skullNameFormat` | "\u00a7e{}\u7684\u5934\u9885" | 头颅物品显示名，`{}` 会替换成玩家名。 |
+| `maxEntriesPerPacket` | 8 | 每个 `PlayerListPacket` 携带的皮肤数量（每个皮肤约 16 KiB）。 |
+| `keepSkinListed` | true |  是否保留普通皮肤条目。 |
+| `useHologramLib` | true | 使用 HologramLib `IPlayerNpc` 在世界中显示头颅。 |
+| `useServerAnchor` | false | 实验性：真实 armor_stand 锚点方案，当前版本强制关闭。 |
 
 当前发布版在加载配置后会强制：
 
@@ -173,6 +166,6 @@ Persona / 4D / 5D 皮肤无法转换为 64x64 头颅贴图。
 
 ## 致谢
 
-- 原 LL2 `CustomSkull` 插件(https://www.minebbs.com/resources/customskull.6291/)：命令布局和数据文件设计参考。
-- GeyserMC(https://geysermc.org/)：基岩版自定义头颅方案和 `geometry.humanoid.customskull` 几何体。
-- HologramLib(https://github.com/Ieckseyr/HologramLib)：26.60 玩家 NPC 协议层和皮肤注册表。
+- 原 LL2 [CustomSkull](https://www.minebbs.com/resources/customskull.6291/)：命令布局和数据文件设计参考。
+- [GeyserMC](https://geysermc.org/)：基岩版自定义头颅方案和 `geometry.humanoid.customskull` 几何体。
+- [HologramLib](https://github.com/Ieckseyr/HologramLib)：26.60 玩家 NPC 协议层和皮肤注册表。
