@@ -1,0 +1,9 @@
+{
+    "name": "CustomSkull",
+    "entry": "CustomSkull.dll",
+    "version": "${modVersion}",
+    "type": "native",
+    "platform": "server",
+    "author": "Byjsmc",
+    "description": "Custom player skulls for your Bedrock server with LeviLamina."
+}
