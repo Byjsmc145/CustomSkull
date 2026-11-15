@@ -4,7 +4,7 @@
 
 可以把在线基岩版玩家的皮肤、Java 版账号皮肤或本地 PNG 制作成头颅物品，放置到世界里作为自定义玩家头。客户端不需要安装资源包。
 
-> 当前版本核心功能可用；放置后有一个已知的视觉偏移问题，见[已知问题](#已知问题)。欢迎提交 PR。
+> 当前版本核心功能可用；放置后有两个已知问题，见[已知问题](#已知问题)。欢迎提交 PR。
 
 ## 功能特性
 
@@ -34,7 +34,7 @@ lip install github.com/FLAI-Studio/CustomSkull
 
 ### 手动安装
 
-1. 把 HologramLib 26.60.x 安装到 `./mods/HologramLib/`。
+1. 把 HologramLib 安装到 `./mods/HologramLib/`。
 2. 从 Releases 下载 `CustomSkull-server-windows-x64.zip` 并解压到服务端`./mods`
 
    ```text
@@ -136,7 +136,19 @@ mods/CustomSkull/
 - 真实 armor_stand 骑乘锚点：自定义实体无法被服务端 `fetchEntity`，骑乘失败
 - 周期重发 `PlayerList/AddPlayer/PlayerSkin`：皮肤重置、闪烁、变 Steve
 
-要彻底修复，需要在 HologramLib 层处理玩家 NPC 的垂直偏移，或实现安全的客户端区块重载。欢迎 PR。
+要修复需要在 HologramLib 层处理玩家 NPC 的垂直偏移，或实现安全的客户端区块重载。欢迎 PR。
+
+### 客户端玩家列表残留 `Skull-*`
+
+HologramLib 创建玩家 NPC 时会向客户端发送 `PlayerListPacket`，但这些伪玩家只存在于客户端，服务端目标选择器不存在它们。
+
+HologramLib 的 `processTabRemovals` 不会真正发送 Remove 包，因此客户端玩家列表会残留：
+
+- `Skull-<uuid>`
+
+已尝试用 BDS `PlayerListPacket Remove` 清理，但未生效。
+
+该问题不影响真实在线玩家数量、实际头颅显示和服务器逻辑。
 
 ### Java API 限流
 
